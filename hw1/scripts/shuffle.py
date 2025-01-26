@@ -11,26 +11,18 @@ def split_and_write_data(data: np.ndarray, training_percent=0.0, training_amount
     data_length = data.shape[0]
     if training_percent:
         index = int(data_length * training_percent)
-        training_data = data[:index]
-        testing_data = data[index:]
+        testing_data = data[:index]
+        training_data = data[index:]
     else:
         training_data = data[:training_amount]
         testing_data = data[training_amount:]
-    training_data_labels, testing_data_labels = (
-        training_data[:, -1],
-        testing_data[:, -1],
-    )
-    training_data, testing_data = training_data[:, :-1], testing_data[:, :-1]
 
     data_name = "spam"
     if data_length == MNIST_DATA_LENGTH:
         data_name = "mnist"
 
     np.save(f"../data/{data_name}_training_data.npy", training_data)
-    np.save(f"../data/{data_name}_training_data_labels.npy", training_data_labels)
-
     np.save(f"../data/{data_name}_testing_data.npy", testing_data)
-    np.save(f"../data/{data_name}_testing_data_labels.npy", testing_data_labels)
 
 
 def main():
