@@ -1,3 +1,67 @@
+# Lecture 2 Notes
+Decision boundaries don't have to be linear <br>
+Decision boundary is {$x\in\mathbb{R}^d: f(x) = 0$} <br>
+
+{$x: f(x) = 0$} is called an isosurface of $f$ for the isovalue $0$ <br>
+$f$ has other isosurfaces for other isovalues, e.g. {$x: f(x) = 1$} <br>
+
+Isocountours can show you the gradients and the minimum of a decision functions <br>
+
+Linear classifiers are have decision boundaries that are lines or planes <br>
+
+Euclidean inner product (dot product): Can be rewritten as $X^TY$ <br>
+<br>
+Euclidean Norm: $||x|| = \sqrt{x \cdot x} = \sqrt{x_1^2+x_2^3 + ... + x^2_d}$ <br>
+Given a vector x != 0, $\frac{x}{||x||}$ is a unit vector <br>
+"Normalize a vector x": replace $x$ with $\frac{x}{||x||}$ <br>
+
+Given a linaer decision function $f(x) = w \cdot x + \alpha$, the decision boundary is $H = \{x : w \cdot x= -\alpha\}$ <br>
+The set $H$ is called a hyperplane (a line in 2D, a plane in 3D) <br>
+
+Theorem: Let $x,y$ be 2 points that lie on H, then $w \cdot(y-x) = 0$ <br>
+Proof: $w \cdot(y-x) = -\alpha - (-\alpha) = 0 $ <br>
+
+$w$ is called the normal vector of $H$, because (as the theorem shows) $w$ is normal (perpendicular) to $H$. <br>
+
+If $w$ is a unit vector, the $f(x) = w \cdot x + \alpha$ is the signed distance from the point x to $H$. <br>
+
+If $x$ is on the other side of $w$ wth respect to $H$, then the value will be negative. <br>
+The distance from $H$ to the origin is $\alpha$ <br>
+So $\alpha = 0$ if and only if $H$ passes through the origin. <br>
+
+Coefficients in $w$, plus $\alpha$ are called weights <br>
+The training pts are linearly separable if there exists a line that perfectly divides the points into their respective categories <br>
+
+The Centroid method: compute the mean $\mu_c$ of all the training points in class C and mean $\mu_x$ of all points NOT in class C. We use the following decision functions <br>
+$f(x) = (\mu_c - \mu_x) \cdot x-(\mu_c-\mu_x) \cdot \frac{\mu_c + \mu_x}{2}$ <br>
+
+So the decision boundary is the hyperplane that bisects line segment w/ endpoints $\mu_c$ and $\mu_x$ <br>
+
+Perceptron Algorithm (Frank Rosenblatt, 1957) <br>
+Slow, but is correct for linearly separable training points <br>
+Uses a numerical optimization algorithm to find a hyperplane that separates the class C points from the non class C points. Namely, gradient descent <br>
+
+Consider n sample points, $X_1, X_2, ..., X_n$ <br>
+For each sample point, the label $y_i = \{1 \text{ if } x_i \in C \text{ and } 0 \text{ otherwise }\}$ <br>
+Goal: find weights $w$ such that <br>
+$x_i \cdot w \geq 0$ if $y_i = 1$ <br>
+$x_i \cdot w \leq 0$ if $y_i = -1$ <br>
+
+Idea: we define a risk function $R$ that is positivei f some constraints are violated. Then we use optimization to choose $w$ that minimizes $R$. <br>
+Define the loss function: <br>
+$L(z, y_i) = \begin{cases} 0 \text{ if } y_iz\geq0 \\ -y_iz \text{ otherwise }\end{cases}$ <br>
+If $z$ has same sign as $y_i$, the loss fn is zero (happiness) <br>
+If $z$ has wrong sign, loss fn is positive <br>
+Define risk function (aka objective function and cost function) <br>
+$R(w) = \frac{1}{n}\sum^n_{i=1} L(X_i \cdot w,y_i)$ = $\frac{1}{n}\sum_{i\in v}-y_i x_i \cdot w$ <br>
+Where $v$ is the set of indices $i$ for which $y_ix_i \cdot w < 0$ <br>
+If $w$ classifies all $X_1, ..., X_n$ correctly, then $R(w) = 0$. Otherwise $R(w) > 0$ <br>
+Find $w$ that optimizes $R(w)$ <br>
+
+
+
+
+
 # ESL Chapter 1: Introduction
 Supervised Learning gets its name because of the presence of the outcome variable to guide the learning process. Variable that we are predicting will be in our training data. <br>
 
