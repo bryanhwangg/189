@@ -1,4 +1,4 @@
-I authored/edited the following files in this repository
+I authored/edited the following files in this repository <br>
 hw1/homework.md <br>
 hw1/notes.md <br>
 hw1/scripts/check.py <br>
