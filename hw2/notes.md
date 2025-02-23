@@ -28,10 +28,35 @@ $C > 0$ is a scalar regularization hyperparameter that trades off <br>
 
 For a small C, you want to maximize margin $\frac{1}{||w||}$ and for big C you want to keep most slack variables 0 or small. <br>
 
-For small C, you have danger of underfitting (misclasssifies a lot of training data). For big C, there is danger of overfitting. <br>
+For small C, you have danger of underfitting (misclasssifies a lot of training data). For big C, there is danger of overfitting. <br> 
 
 For small C, model is less sensitive to outliers. For big C, model is very sensitive to outliers. <br>
 
 For small C, boundaries are more "flat". For big C, boundaries are more sinous <br>
 
+# Features <br>
+Q: How to do nonlinear decision boundaries? <br>
+Make nonlinear features that lift points into higher dimensional space <br>
 
+High-dimensional space, apply classifier which then results in low dimensional nonlinear classifier. <br>
+
+Example 1: The parabolic lifting map<br>
+
+$\phi:\mathbb{R}^d \rarr \mathbb{R}^{d+1}$ <br>
+$\phi(x) = \begin{bmatrix} x \\ ||x||^2\end{bmatrix} \larr$ lifts $x$ onto paraboloid $x_{d+1} = ||x||^2$
+
+Find a linear classifier in $\phi$ space<br>
+It induces a sphere classifier in x-space
+
+Theorem: $\phi(X_1), ..., \phi(X_n)$ are linearly separable if and only if $X_1,...,X_n$ are separable by a hypersphere. (Possibly an infinite-radius hypersphere=hyperplane)
+
+Proof: Consider hpyersphere in $\mathbb{R}^d$ with center c and radius p. x is inside if and only if  <br>
+$||x-c||^2 < p^2$ <br>
+$||x||^2-2c \cdot x + ||c||^2 < p^2$<br>
+$[-2c^T \ \ \ 1] \begin{bmatrix} x \\ ||x||^2\end{bmatrix} < p^2 - ||c||^2$
+
+Where $[-2c^T \ \ \ 1]$ is the normal vector and $\begin{bmatrix} x \\ ||x||^2\end{bmatrix}$ is $\phi(x)$
+
+Hence, points inside sphere $\leftrightarrow$ lifted points underneath hyperplane in $\phi$-space.
+
+## Eplipsoid/hyperpoloid/paraboloid decision boundaries
